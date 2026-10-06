@@ -1,0 +1,12 @@
+node_modules/
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+!.env.example
+chunks/
+snaps/
+*.mp4
+*.wav
+concat.txt

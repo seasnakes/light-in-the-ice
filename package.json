@@ -1,0 +1,14 @@
+{
+  "name": "light-in-the-ice",
+  "version": "1.0.0",
+  "private": true,
+  "description": "冰中之光 · Light in the Ice — 2026 诺贝尔物理学奖动画短片（WebGL 画面 + 程序合成配乐）的源代码",
+  "scripts": {
+    "cues": "node export_cues.js",
+    "render": "bash render_all.sh",
+    "assemble": "bash assemble.sh"
+  },
+  "dependencies": {
+    "playwright": "^1.56.0"
+  }
+}

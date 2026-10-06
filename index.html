@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>冰中之光</title>
+<style>
+  :root{
+    --ink:#e9eff8; --ink2:rgba(214,226,242,.62); --ink3:rgba(200,214,235,.38);
+    --cyan:#8fd6ff; --ice:#bfe6ff; --gold:#d9b872; --amber:#ffb054; --red:#ff6a5a;
+  }
+  html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:#000}
+  canvas{position:absolute;left:0;top:0;width:1920px;height:1080px}
+  #ui{position:absolute;inset:0;pointer-events:none;color:var(--ink);
+      font-family:"Noto Sans CJK SC","Noto Sans SC","PingFang SC","Microsoft YaHei","Inter",sans-serif;-webkit-font-smoothing:antialiased;}
+  .el{position:absolute;white-space:nowrap;will-change:opacity,transform,filter}
+  .serif{font-family:"Noto Serif CJK SC","Noto Serif SC","Songti SC","STSong",serif}
+  .lat{font-family:"Inter",sans-serif}
+  .c{transform-origin:50% 50%}
+  /* type styles */
+  .kicker{font:500 15px "Inter";letter-spacing:.42em;color:var(--gold);text-transform:uppercase}
+  .kicker-zh{font:300 22px "Noto Serif CJK SC","Noto Serif SC","Songti SC","STSong";letter-spacing:.32em;color:rgba(232,214,170,.9)}
+  .name-zh{font:200 84px "Noto Serif CJK SC","Noto Serif SC","Songti SC","STSong";letter-spacing:.16em;color:#f3f0ea}
+  .name-en{font:200 26px "Inter";letter-spacing:.62em;color:rgba(235,228,212,.78)}
+  .affil{font:300 18px "Noto Sans CJK SC","Noto Sans SC","PingFang SC","Microsoft YaHei";letter-spacing:.2em;color:var(--ink3)}
+  .cite{font:300 27px "Noto Serif CJK SC","Noto Serif SC","Songti SC","STSong";letter-spacing:.12em;line-height:1.9;color:rgba(236,232,224,.86);text-align:center}
+  .q{font:200 58px "Noto Serif CJK SC","Noto Serif SC","Songti SC","STSong";letter-spacing:.14em;color:#eef4fb}
+  .title{font:200 132px "Noto Serif CJK SC","Noto Serif SC","Songti SC","STSong";letter-spacing:.5em;color:#f2f7ff;text-shadow:0 0 40px rgba(140,200,255,.35)}
+  .title-en{font:200 22px "Inter";letter-spacing:1.05em;color:rgba(190,225,255,.8)}
+  .title-sub{font:300 20px "Noto Sans CJK SC","Noto Sans SC","PingFang SC","Microsoft YaHei";letter-spacing:.3em;color:var(--ink3)}
+  .chap{font:200 15px "Inter";letter-spacing:.38em;color:var(--ink3)}
+  .chap b{font-weight:300;color:var(--cyan);letter-spacing:.2em;margin-right:22px}
+  .chap .zh{font:300 17px "Noto Sans CJK SC","Noto Sans SC","PingFang SC","Microsoft YaHei";letter-spacing:.3em;color:var(--ink2);margin-right:20px}
+  .h1{font:200 64px "Noto Serif CJK SC","Noto Serif SC","Songti SC","STSong";letter-spacing:.12em;color:#f1f6fd}
+  .h1-en{font:200 18px "Inter";letter-spacing:.7em;color:rgba(170,215,255,.75)}
+  .body{font:300 32px "Noto Serif CJK SC","Noto Serif SC","Songti SC","STSong";letter-spacing:.08em;line-height:1.75;color:rgba(234,240,248,.92)}
+  .body-s{font:300 22px "Noto Sans CJK SC","Noto Sans SC","PingFang SC","Microsoft YaHei";letter-spacing:.14em;line-height:1.8;color:var(--ink2)}
+  .note{font:300 16px "Noto Sans CJK SC","Noto Sans SC","PingFang SC","Microsoft YaHei";letter-spacing:.16em;color:var(--ink3)}
+  .tag{font:300 20px "Noto Sans CJK SC","Noto Sans SC","PingFang SC","Microsoft YaHei";letter-spacing:.16em;color:var(--ink)}
+  .tag small{display:block;font:300 13px "Inter";letter-spacing:.32em;color:var(--ink3);margin-top:6px;text-transform:uppercase}
+  .num{font:100 92px "Inter";letter-spacing:.02em;font-variant-numeric:tabular-nums;color:#f4f8ff}
+  .num-m{font:200 54px "Inter";font-variant-numeric:tabular-nums;color:#eef6ff}
+  .unit{font:300 19px "Noto Sans CJK SC","Noto Sans SC","PingFang SC","Microsoft YaHei";letter-spacing:.2em;color:var(--ink2)}
+  .unit-en{font:300 12px "Inter";letter-spacing:.36em;color:var(--ink3);text-transform:uppercase}
+  .mono{font:300 15px "Inter";letter-spacing:.24em;font-variant-numeric:tabular-nums;color:var(--ink3)}
+  .huge{font:100 300px "Inter";letter-spacing:-.02em;color:#fff;text-shadow:0 0 60px rgba(150,210,255,.55)}
+  .rule{position:absolute;height:1px;background:linear-gradient(90deg,rgba(180,215,255,0),rgba(180,215,255,.55),rgba(180,215,255,0))}
+  .stat{display:flex;align-items:baseline;gap:18px}
+  .stat .lab{display:flex;flex-direction:column;gap:6px}
+  .gold{color:var(--gold)} .cyan{color:var(--cyan)} .amber{color:var(--amber)} .red{color:var(--red)}
+  .center{text-align:center}
+  .bead{position:absolute;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle,#fff 0,#bfe8ff 35%,rgba(120,200,255,.0) 72%);box-shadow:0 0 18px rgba(130,200,255,.85)}
+  .bead.bg{background:none;border:1px solid rgba(255,190,120,.6);box-shadow:none;width:14px;height:14px}
+  svg{position:absolute;left:0;top:0;overflow:visible}
+  .gauge-tick{position:absolute;height:1px;background:rgba(190,220,255,.35)}
+</style>
+</head>
+<body>
+<canvas id="gl" width="1920" height="1080"></canvas>
+<div id="ui"></div>
+<script src="engine.js"></script>
+<script src="film_core.js"></script>
+<script src="film_scenes.js"></script>
+<script src="film_scenes2.js"></script>
+<script src="film_main.js"></script>
+</body>
+</html>
